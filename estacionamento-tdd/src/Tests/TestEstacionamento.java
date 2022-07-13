@@ -24,7 +24,7 @@ public class TestEstacionamento {
 	@Test
 	public void calculaValorAcessoHoraCheia() {
 		int valorAcesso = estacionamento.calculaAcesso("Estacionamento1", "8:30", "9:30");
-		assertEquals(valorAcesso, 60);
+		assertEquals(valorAcesso, 102);
 		
 	}
 

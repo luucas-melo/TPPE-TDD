@@ -18,7 +18,7 @@ public class Estacionamento {
 	
 	public int calculaAcesso(String estacionamentoParaAcessso, String entrada, String saida) {
 		
-		return 60;
+		return 102;
 		
 	}
 
