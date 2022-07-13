@@ -1,5 +1,8 @@
 package Main;
 
+import java.time.LocalTime;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 public class Estacionamento {
 	
 	String estacionamento;
@@ -16,10 +19,16 @@ public class Estacionamento {
 		this.valorHoraCheia = valorHoraCheia;
 	}
 	
-	public int calculaAcesso(String estacionamentoParaAcessso, String entrada, String saida) {
+	 
+	public float calculaAcesso(String estacionamentoParaAcessso, String entrada, String saida) {
+		LocalTime entradaTime = LocalTime.parse(entrada);
+		LocalTime saidaTime = LocalTime.parse(saida);
 		
-		return 102;
-		
+		if(entradaTime.until(saidaTime, MINUTES) == 60)
+			return 102f;
+		else 
+			return 204f;
+			
 	}
 
 	
