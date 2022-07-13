@@ -34,5 +34,12 @@ public class TestEstacionamento {
 		assertEquals(valorAcesso, 204f, 0.1f);
 		
 	}
+	
+	@Test
+	public void calculaValorAcesso3HoraCheia() {
+		float valorAcesso = estacionamento.calculaAcesso("Estacionamento1", "08:00:00", "11:00:00");
+		assertEquals(valorAcesso, 306f, 0.1f);
+		
+	}
 
 }

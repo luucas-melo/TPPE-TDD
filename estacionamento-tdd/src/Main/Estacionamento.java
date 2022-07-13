@@ -26,9 +26,10 @@ public class Estacionamento {
 		
 		if(entradaTime.until(saidaTime, MINUTES) == 60)
 			return 102f;
-		else 
+		else if(entradaTime.until(saidaTime, MINUTES) == 120)
 			return 204f;
-			
+		else 
+			return 306f;		
 	}
 
 	
