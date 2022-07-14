@@ -23,12 +23,19 @@ public class Acesso {
 		
 		int fracoesDe15Minutos = (int) Math.ceil(tempoPermanencia/15f);
 		
+		// Falsificação entrada noturna
+		if(entradaTime.until(LocalTime.parse(this.estacionamentoAcessado.entradaNoturna), MINUTES) <= 0) {
+			return 21f;
+		}
+		
 		if(fracoesDe15Minutos >= 4 && fracoesDe15Minutos <=36) {
 			return  (1 - this.estacionamentoAcessado.valorHoraCheia) * 
 					(this.estacionamentoAcessado.valorFracao * fracoesDe15Minutos);
 		} 
 		
+		
 		return 0f;
+		
 				
 	}
 }
