@@ -2,7 +2,11 @@ package Main;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Acesso {
 	
@@ -17,15 +21,25 @@ public class Acesso {
 	}
 	
 	public float calculaAcesso() {
-		LocalTime entradaTime = LocalTime.parse(this.horaEntrada);
-		LocalTime saidaTime = LocalTime.parse(this.horaSaida);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		LocalDateTime entradaTime = LocalDateTime.parse(this.horaEntrada, formatter);
+		LocalDateTime saidaTime = LocalDateTime.parse(this.horaSaida, formatter);
+		LocalDateTime entradaNoturna = LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna, formatter); 
+		System.out.println(entradaTime);
+		
 		float tempoPermanencia = entradaTime.until(saidaTime, MINUTES);
 		
 		int fracoesDe15Minutos = (int) Math.ceil(tempoPermanencia/15f);
 		
+	
+		LocalTime timeExtraidoNoturna = entradaNoturna.toLocalTime();
+		LocalDate dateExtraidoAcesso = entradaTime.toLocalDate();
+		System.out.println(, MINUTES));
 		// Falsificação entrada noturna
-		if(entradaTime.until(LocalTime.parse(this.estacionamentoAcessado.entradaNoturna), MINUTES) <= 0) {
-			return 21f;
+		if(entradaTime.until(LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna), MINUTES) <= 0) {
+			LocalDateTime timeExtraidoNoturno = this.estacionamentoAcessado.entradaNoturna;
+			return this.estacionamentoAcessado.porcentagemDiariaNoturna * this.estacionamentoAcessado.valorDiariaDiurna;
 		}
 		
 		if(fracoesDe15Minutos >= 4 && fracoesDe15Minutos <=36) {
