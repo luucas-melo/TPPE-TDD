@@ -21,12 +21,11 @@ public class Acesso {
 	}
 	
 	public float calculaAcesso() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		
 		LocalDateTime entradaTime = LocalDateTime.parse(this.horaEntrada, formatter);
 		LocalDateTime saidaTime = LocalDateTime.parse(this.horaSaida, formatter);
 		LocalDateTime entradaNoturna = LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna, formatter); 
-		System.out.println(entradaTime);
 		
 		float tempoPermanencia = entradaTime.until(saidaTime, MINUTES);
 		
@@ -35,10 +34,9 @@ public class Acesso {
 	
 		LocalTime timeExtraidoNoturna = entradaNoturna.toLocalTime();
 		LocalDate dateExtraidoAcesso = entradaTime.toLocalDate();
-		System.out.println(, MINUTES));
 		// Falsificação entrada noturna
-		if(entradaTime.until(LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna), MINUTES) <= 0) {
-			LocalDateTime timeExtraidoNoturno = this.estacionamentoAcessado.entradaNoturna;
+		if(entradaTime.until(LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna, formatter), MINUTES) <= 0) {
+			LocalDateTime timeExtraidoNoturno = LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna, formatter);
 			return this.estacionamentoAcessado.porcentagemDiariaNoturna * this.estacionamentoAcessado.valorDiariaDiurna;
 		}
 		

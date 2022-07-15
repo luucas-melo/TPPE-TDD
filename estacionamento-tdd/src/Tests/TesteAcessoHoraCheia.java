@@ -25,7 +25,7 @@ public class TesteAcessoHoraCheia {
 	
 	@Before
 	public void setup() {
-		estacionamento = new Estacionamento("Estacionamento1", 30f, 0.15f);
+		estacionamento = new Estacionamento("Estacionamento1", 30f, 0.15f, 120f, 0.45f, "15-08-2022 19:00:00", "15-08-2022 08:00:00");
 		acesso = new Acesso(estacionamento, placa, horaEntrada, horaSaida);
 	}
 	
@@ -39,9 +39,9 @@ public class TesteAcessoHoraCheia {
 	@Parameters
 	public static Iterable<Object[]> getParameters() {
 		Object[][] resposta = new Object[][] {
-			{"HI139", "08:30:00", "09:30:00", 102f}, 
-			{"HI139", "08:00:00", "10:00:00", 204f}, 
-			{"HI139", "08:00:00", "11:00:00", 306f}, 
+			{"HI139", "15-08-2022 08:30:00", "15-08-2022 09:30:00", 102f}, 
+			{"HI139", "15-08-2022 08:00:00", "15-08-2022 10:00:00", 204f}, 
+			{"HI139", "15-08-2022 08:00:00", "15-08-2022 11:00:00", 306f}, 
 		};
 		
 		return Arrays.asList(resposta);
