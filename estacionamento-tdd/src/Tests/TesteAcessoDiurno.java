@@ -16,7 +16,7 @@ import Main.Estacionamento;
 
 @RunWith(Parameterized.class)
 @Category(TesteFuncional.class)
-public class TesteAcessoFracao {
+public class TesteAcessoDiurno {
 
 	private Estacionamento estacionamento;
 	private Acesso acesso;
@@ -25,7 +25,7 @@ public class TesteAcessoFracao {
 	valorAcessoEvento, retornoContratante, valorCalculadoAcesso;
 	private int capacidade;
 		
-	public TesteAcessoFracao(String nomeEstacionamento, float valorFracao, float valorHoraCheia, float valorDiariaDiurna, 
+	public TesteAcessoDiurno(String nomeEstacionamento, float valorFracao, float valorHoraCheia, float valorDiariaDiurna, 
 			float porcentagemDiariaNoturna,  String entradaNoturna, String retiradaNoturna, float valorAcessoMensalista, 
 			float valorAcessoEvento, int capacidade, float retornoContratante, String placa, String horaEntrada, String horaSaida,
 			String tipoAcesso, float valorCalculadoAcesso){
@@ -54,11 +54,11 @@ public class TesteAcessoFracao {
 	public static Iterable<Object[]> getParameters() {
 		Object[][] resposta = new Object[][] {
 			{"Estacionamento1", 30f, 0.15f, 120f, 0.45f, "15-08-2022 19:00:00", "15-08-2022 08:00:00", 600f, 50f, 300, 0.5f, 
-				"AM31J", "15-08-2022 10:00:00", "15-08-2022 10:43:00", "", 90f}, 
-			{"Estacionamento1", 30f, 0.15f, 120f, 0.45f, "15-08-2022 19:00:00", "15-08-2022 08:00:00", 600f, 50f, 300, 0.5f, 
-				"AM31J", "15-08-2022 10:00:00", "15-08-2022 10:30:00", "", 60f},
-			{"Estacionamento1", 30f, 0.15f, 120f, 0.45f, "15-08-2022 19:00:00", "15-08-2022 08:00:00", 600f, 50f, 300, 0.5f, 
-				"AM31J", "15-08-2022 10:00:00", "15-08-2022 10:14:00", "", 30f},
+				"AM31J", "15-08-2022 10:00:00", "15-08-2022 19:30:00", "", 120f}, 
+			{"Estacionamento2", 20f, 0.15f, 70f, 0.45f,"15-08-2022 21:00:00", "15-08-2022 07:00:00", 455f, 60f, 120, 0.6f, 
+				"G49NG", "15-08-2022 10:00:00", "15-08-2022 20:00:00", "", 70f},
+			{"Estacionamento3", 10f, 0f, 50f, 0.40f, "15-08-2022 20:00:00", "15-08-2022 08:00:00", 350f, 40f, 600, 0.7f, 
+				"RM3A9", "15-08-2022 10:00:00", "15-08-2022 20:30:00", "", 50f},
 		};
 		
 		return Arrays.asList(resposta);
@@ -76,8 +76,9 @@ public class TesteAcessoFracao {
 	}
 	
 	@Test
-	public void calculaValorAcessoPorFracao() {	
+	public void calculaValorAcessoDiurno() {	
 		float valorAcesso = this.acesso.calculaAcesso();
 		assertEquals(valorAcesso, this.valorCalculadoAcesso, 0.1f);
 	}
+
 }

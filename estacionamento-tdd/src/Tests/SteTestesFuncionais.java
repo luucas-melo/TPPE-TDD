@@ -9,7 +9,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ TesteAcessoHoraCheia.class, 
 				TesteAcessoNoturno.class, 
 				TesteValorContratante.class,
-				TesteAcessoFracao.class})
+				TesteAcessoFracao.class,
+				TesteAcessoDiurno.class})
 @IncludeCategory(TesteFuncional.class)
 public class SteTestesFuncionais {
 
