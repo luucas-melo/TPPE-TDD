@@ -12,12 +12,21 @@ public class Acesso {
 	
 	String placa, horaEntrada, horaSaida;
 	Estacionamento estacionamentoAcessado;
+	String tipoAcesso;
 	
 	public Acesso(Estacionamento estacionamento, String placa, String horaEntrada, String horaSaida) {
 		this.placa = placa;
 		this.horaEntrada = horaEntrada;
 		this.horaSaida = horaSaida;
 		this.estacionamentoAcessado = estacionamento;
+	}
+	
+	public Acesso(Estacionamento estacionamento, String placa, String horaEntrada, String horaSaida, String tipoAcesso) {
+		this.placa = placa;
+		this.horaEntrada = horaEntrada;
+		this.horaSaida = horaSaida;
+		this.estacionamentoAcessado = estacionamento;
+		this.tipoAcesso = tipoAcesso;
 	}
 	
 	public float calculaAcesso() {

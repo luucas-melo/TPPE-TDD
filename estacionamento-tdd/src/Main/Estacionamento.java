@@ -6,6 +6,7 @@ public class Estacionamento {
 	float valorFracao,  valorHoraCheia, valorDiariaDiurna;
 	float porcentagemDiariaNoturna;
 	String entradaNoturna, retiradaNoturna;
+	float porcentagemContratante;
 	
 
 	public Estacionamento(String nomeEstacionamento, float valorFracao, float valorHoraCheia) {
@@ -28,6 +29,9 @@ public class Estacionamento {
 	}
 	
 
+	public float calculaValorContratante() {
+		return 130f;
+	}
 
 	
 }
