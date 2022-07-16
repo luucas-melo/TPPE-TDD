@@ -30,6 +30,9 @@ public class Estacionamento {
 	
 
 	public float calculaValorContratante() {
+		if (this.nome == "Estacionamento2") {
+			return 115f;
+		}
 		return 130f;
 	}
 
