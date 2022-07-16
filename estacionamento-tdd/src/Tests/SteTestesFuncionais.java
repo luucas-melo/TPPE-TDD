@@ -6,7 +6,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Categories.class)
-@SuiteClasses({ TesteAcessoHoraCheia.class, TesteAcessoNoturno.class, TesteValorContratante.class })
+@SuiteClasses({ TesteAcessoHoraCheia.class, 
+				TesteAcessoNoturno.class, 
+				TesteValorContratante.class,
+				TesteAcessoFracao.class})
 @IncludeCategory(TesteFuncional.class)
 public class SteTestesFuncionais {
 
