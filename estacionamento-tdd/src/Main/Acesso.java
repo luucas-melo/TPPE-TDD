@@ -30,6 +30,15 @@ public class Acesso {
 	}
 	
 	public float calculaAcesso() {
+		if(tipoAcesso != null) {
+			if(tipoAcesso.equals("evento")) {
+				return estacionamentoAcessado.valorAcessoEvento;
+			}
+			else if(tipoAcesso.equals("mensalista")) {
+				return estacionamentoAcessado.valorAcessoMensalista;
+			}
+		}
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		
 		LocalDateTime entradaTime = LocalDateTime.parse(this.horaEntrada, formatter);
@@ -43,20 +52,22 @@ public class Acesso {
 	
 		LocalTime timeExtraidoNoturna = entradaNoturna.toLocalTime();
 		LocalDate dateExtraidoAcesso = entradaTime.toLocalDate();
-		// Falsificação entrada noturna
+
 		if(entradaTime.until(LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna, formatter), MINUTES) <= 0) {
 			LocalDateTime timeExtraidoNoturno = LocalDateTime.parse(this.estacionamentoAcessado.entradaNoturna, formatter);
 			return this.estacionamentoAcessado.porcentagemDiariaNoturna * this.estacionamentoAcessado.valorDiariaDiurna;
 		}
 		
-		if(fracoesDe15Minutos >= 4 && fracoesDe15Minutos <=36) {
+		if(fracoesDe15Minutos < 4) {
+			return this.estacionamentoAcessado.valorFracao * fracoesDe15Minutos;
+			
+		}		
+		else if(fracoesDe15Minutos >= 4 && fracoesDe15Minutos <=36) {
 			return  (1 - this.estacionamentoAcessado.valorHoraCheia) * 
 					(this.estacionamentoAcessado.valorFracao * fracoesDe15Minutos);
-		} 
-		
-		
-		return 0f;
-		
-				
+		}
+		else {
+			return this.estacionamentoAcessado.valorDiariaDiurna;
+		}		
 	}
 }

@@ -1,13 +1,13 @@
 package Main;
 
+import java.util.ArrayList;
+
 public class Estacionamento {
 	
-	String nome;
-	float valorFracao,  valorHoraCheia, valorDiariaDiurna;
-	float porcentagemDiariaNoturna;
-	String entradaNoturna, retiradaNoturna;
-	float porcentagemContratante;
-	
+	String nome, entradaNoturna, retiradaNoturna;
+	float valorFracao,  valorHoraCheia, valorDiariaDiurna, porcentagemContratante,
+		valorAcessoMensalista, valorAcessoEvento, retornoContratante, porcentagemDiariaNoturna;
+	int capacidade;	
 
 	public Estacionamento(String nomeEstacionamento, float valorFracao, float valorHoraCheia) {
 		this.nome = nomeEstacionamento;
@@ -28,12 +28,30 @@ public class Estacionamento {
 		this.retiradaNoturna = retiradaNoturna;
 	}
 	
-
-	public float calculaValorContratante() {
-		if (this.nome == "Estacionamento2") {
-			return 115f;
+	public Estacionamento(String nomeEstacionamento, float valorFracao, float valorHoraCheia, 
+			float valorDiariaDiurna, float porcentagemDiariaNoturna,  
+			String entradaNoturna, String retiradaNoturna, float valorAcessoMensalista, 
+			float valorAcessoEvento, int capacidade, float retornoContratante) {
+				this.nome = nomeEstacionamento;
+				this.valorFracao = valorFracao;
+				this.valorHoraCheia = valorHoraCheia;
+				this.valorDiariaDiurna = valorDiariaDiurna;
+				this.porcentagemDiariaNoturna = porcentagemDiariaNoturna;
+				this.entradaNoturna =  entradaNoturna;
+				this.retiradaNoturna = retiradaNoturna;
+				this.valorAcessoMensalista = valorAcessoMensalista;
+				this.valorAcessoEvento = valorAcessoEvento;
+				this.capacidade = capacidade;
+				this.retornoContratante = retornoContratante;
 		}
-		return 130f;
+	
+
+	public float calculaValorContratante(ArrayList<Acesso> listaAcessos) {
+		float total = 0f;
+		for(Acesso acesso : listaAcessos) {
+			total = total + (acesso.calculaAcesso() * retornoContratante);
+		}
+		return total;
 	}
 
 	
