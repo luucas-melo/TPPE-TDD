@@ -11,6 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
 				TesteValorContratante.class,
 				TesteAcessoFracao.class,
 				TesteAcessoDiurno.class,
+				TesteAcessoMensalista.class,
 				TesteAcessoEvento.class})
 @IncludeCategory(TesteFuncional.class)
 public class SteTestesFuncionais {

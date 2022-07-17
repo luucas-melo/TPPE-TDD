@@ -16,21 +16,21 @@ import Main.Estacionamento;
 
 @RunWith(Parameterized.class)
 @Category(TesteFuncional.class)
-public class TesteAcessoFracao {
 
-	private Estacionamento estacionamento;
+public class TesteAcessoMensalista {
+    private Estacionamento estacionamento;
 	private Acesso acesso;
 	private String nomeEstacionamento, entradaNoturna, retiradaNoturna, placa, horaEntrada, horaSaida, tipoAcesso;
 	private float valorFracao, valorHoraCheia, valorDiariaDiurna, porcentagemDiariaNoturna, valorAcessoMensalista,
 	valorAcessoEvento, retornoContratante, valorCalculadoAcesso;
 	private int capacidade;
-		
-	public TesteAcessoFracao(String nomeEstacionamento, float valorFracao, float valorHoraCheia, float valorDiariaDiurna, 
-			float porcentagemDiariaNoturna,  String entradaNoturna, String retiradaNoturna, float valorAcessoMensalista, 
-			float valorAcessoEvento, int capacidade, float retornoContratante, String placa, String horaEntrada, String horaSaida,
-			String tipoAcesso, float valorCalculadoAcesso){
-		
-		this.nomeEstacionamento = nomeEstacionamento;
+
+    public TesteAcessoMensalista(String nomeEstacionamento, float valorFracao, float valorHoraCheia, float valorDiariaDiurna, 
+    float porcentagemDiariaNoturna,  String entradaNoturna, String retiradaNoturna, float valorAcessoMensalista, 
+    float valorAcessoEvento, int capacidade, float retornoContratante, String placa, String horaEntrada, String horaSaida,
+    String tipoAcesso, float valorCalculadoAcesso){
+
+        this.nomeEstacionamento = nomeEstacionamento;
 		this.valorFracao = valorFracao;
 		this.valorHoraCheia = valorHoraCheia;
 		this.valorDiariaDiurna = valorDiariaDiurna;
@@ -48,17 +48,18 @@ public class TesteAcessoFracao {
 		this.tipoAcesso = tipoAcesso;
 		
 		this.valorCalculadoAcesso = valorCalculadoAcesso;
-	}
-	
-	@Parameters
+
+    }
+
+    @Parameters
 	public static Iterable<Object[]> getParameters() {
 		Object[][] resposta = new Object[][] {
 			{"Estacionamento1", 30f, 0.15f, 120f, 0.45f, "15-08-2022 19:00:00", "15-08-2022 08:00:00", 600f, 50f, 300, 0.5f, 
-				"AM31J", "15-08-2022 08:30:00", "15-08-2022 08:56:00", "", 60f}, 
+				"AM31J", "15-08-2022 08:30:00", "15-08-2022 08:56:00", "mensalista", 600f}, 
 			{"Estacionamento2", 20f, 0.10f, 70f, 0.30f, "15-08-2022 21:00:00", "15-08-2022 07:00:00", 455f, 60f, 120, 0.6f, 
-				"G49NG", "15-08-2022 15:12:00", "15-08-2022 16:00:00", "", 72f},
+				"G49NG", "15-08-2022 15:12:00", "15-08-2022 16:00:00", "mensalista", 455f},
 			{"Estacionamento3", 10f, 0f, 50f, 0.40f, "15-08-2022 20:00:00", "15-08-2022 08:00:00", 350f, 40f, 600, 0.7f, 
-				"XX31J", "15-08-2022 10:00:00", "15-08-2022 10:14:00", "", 10f},
+				"XX31J", "15-08-2022 10:00:00", "15-08-2022 10:14:00", "mensalista", 350f},
 		};
 		
 		return Arrays.asList(resposta);
