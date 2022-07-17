@@ -12,7 +12,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import Main.Acesso;
+import Main.DescricaoEmBrancoException;
 import Main.Estacionamento;
+import Main.ValorAcessoInvalidoException;
 
 @RunWith(Parameterized.class)
 @Category(TesteFuncional.class)
@@ -65,7 +67,7 @@ public class TesteAcessoEvento {
 	}
 	
 	@Before
-	public void setup() {
+	public void setup() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		
 		estacionamento = new Estacionamento (nomeEstacionamento, valorFracao, valorHoraCheia,valorDiariaDiurna,
 				porcentagemDiariaNoturna, entradaNoturna, retiradaNoturna, valorAcessoMensalista, valorAcessoEvento,
@@ -75,10 +77,16 @@ public class TesteAcessoEvento {
 		
 	}
 	
-	@Test
-	public void calculaValorAcessoPorEvento() {	
-		float valorAcesso = this.acesso.calculaAcesso();
-		assertEquals(valorAcesso, this.valorCalculadoAcesso, 0.1f);
+	@Test(expected=ValorAcessoInvalidoException.class)
+	@Category(TesteDeExcecao.class)
+	public void instanciaEstacionamentoComValorFracaoNegativo() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
+		new Estacionamento("Estacionamento1", -1f, 0.15f);
+	}
+	
+	@Test(expected=DescricaoEmBrancoException.class)
+	@Category(TesteDeExcecao.class)
+	public void instanciaEstacionamentoComNomeEmBranco() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
+		new Estacionamento("", 30f, 0.15f);
 	}
 
 }

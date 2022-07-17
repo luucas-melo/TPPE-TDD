@@ -13,7 +13,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import Main.Acesso;
+import Main.DescricaoEmBrancoException;
 import Main.Estacionamento;
+import Main.ValorAcessoInvalidoException;
 
 
 @RunWith(Parameterized.class)
@@ -31,7 +33,7 @@ public class TesteAcessoNoturno {
 	private Acesso acesso;
 	
 	@Before
-	public void setup() {
+	public void setup() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		estacionamento = new Estacionamento(nome, valorFracao, valorHoraCheia, 
 				valorDiariaDiurna, porcentagemDiariaNoturna, entradaNoturna, retiradaNoturna);
 		acesso = new Acesso(estacionamento, placa, horaEntrada, horaSaida);

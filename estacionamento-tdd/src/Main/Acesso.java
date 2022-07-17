@@ -14,14 +14,22 @@ public class Acesso {
 	Estacionamento estacionamentoAcessado;
 	String tipoAcesso;
 	
-	public Acesso(Estacionamento estacionamento, String placa, String horaEntrada, String horaSaida) {
+	public Acesso(Estacionamento estacionamento, String placa, String horaEntrada, String horaSaida) throws DescricaoEmBrancoException {
+		if (placa == null || placa.equals("")) {
+            throw new DescricaoEmBrancoException("Dados da placa nulo ou vazio");
+        }
+		
 		this.placa = placa;
 		this.horaEntrada = horaEntrada;
 		this.horaSaida = horaSaida;
 		this.estacionamentoAcessado = estacionamento;
 	}
 	
-	public Acesso(Estacionamento estacionamento, String placa, String horaEntrada, String horaSaida, String tipoAcesso) {
+	public Acesso(Estacionamento estacionamento, String placa, String horaEntrada, String horaSaida, String tipoAcesso) throws DescricaoEmBrancoException {
+		if (placa == null || placa.equals("")) {
+            throw new DescricaoEmBrancoException("Dados da placa nulo ou vazio");
+        }
+
 		this.placa = placa;
 		this.horaEntrada = horaEntrada;
 		this.horaSaida = horaSaida;

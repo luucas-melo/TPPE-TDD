@@ -12,7 +12,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import Main.Acesso;
+import Main.DescricaoEmBrancoException;
 import Main.Estacionamento;
+import Main.ValorAcessoInvalidoException;
 
 @RunWith(Parameterized.class)
 @Category(TesteFuncional.class)
@@ -66,7 +68,7 @@ public class TesteAcessoMensalista {
 	}
 	
 	@Before
-	public void setup() {
+	public void setup() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		
 		estacionamento = new Estacionamento (nomeEstacionamento, valorFracao, valorHoraCheia,valorDiariaDiurna,
 				porcentagemDiariaNoturna, entradaNoturna, retiradaNoturna, valorAcessoMensalista, valorAcessoEvento,

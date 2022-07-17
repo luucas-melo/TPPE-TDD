@@ -13,7 +13,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import Main.Acesso;
+import Main.DescricaoEmBrancoException;
 import Main.Estacionamento;
+import Main.ValorAcessoInvalidoException;
 
 @RunWith(Parameterized.class)
 @Category(TesteFuncional.class)
@@ -75,7 +77,7 @@ public class TesteValorContratante {
 	
 	
 	@Before
-	public void setup() {
+	public void setup() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 		
 		estacionamento = new Estacionamento (nomeEstacionamento, valorFracao, valorHoraCheia,valorDiariaDiurna,
 				porcentagemDiariaNoturna, entradaNoturna, retiradaNoturna, valorAcessoMensalista, valorAcessoEvento,
@@ -83,7 +85,7 @@ public class TesteValorContratante {
 	}
 	
 	@Test
-	public void calculaValorContratante() {
+	public void calculaValorContratante() throws DescricaoEmBrancoException {
 		
 		ArrayList<Acesso> listaAcessos = new ArrayList<>();
 		
