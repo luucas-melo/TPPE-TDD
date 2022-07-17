@@ -55,17 +55,17 @@ public class TesteValorContratante {
 		Object[] acesso3 = new Object[] {"AM31J", "15-08-2022 10:00:00", "15-08-2022 10:43:00", ""};
 		
 		Object[][] resposta = new Object[][] {
-			{"Estacionamento1", 30f, 0.15f, 120f, 0.45f, "15-08-2022 19:00:00", "15-08-2022 08:00:00", 600f, 50f, 300, 0.5f, 
+			{"Estacionamento1", 30f, 0.15f, 120f, 0.45f, "19:00:00", "08:00:00", 600f, 50f, 300, 0.5f, 
 				new Object[][]{
 					acesso1,
 					acesso2,
 					acesso3},130f}, 
-			{"Estacionamento2", 20f, 0.15f, 120f, 0.45f,"15-08-2022 21:00:00", "15-08-2022 07:00:00", 455f, 60f, 120, 0.6f, 
+			{"Estacionamento2", 20f, 0.15f, 120f, 0.45f,"21:00:00", "07:00:00", 455f, 60f, 120, 0.6f, 
 				new Object[][]{
 					acesso1,
 					acesso2,
 					acesso3},144f},
-			{"Estacionamento3", 10f, 0f, 50f, 0.40f, "15-08-2022 20:00:00", "15-08-2022 08:00:00", 350f, 40f, 600, 0.7f,
+			{"Estacionamento3", 10f, 0f, 50f, 0.40f, "20:00:00", "08:00:00", 350f, 40f, 600, 0.7f,
 				new Object[][]{
 					acesso1,
 					acesso2,
