@@ -2,7 +2,6 @@ package Main;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +32,16 @@ public class Acesso {
 		this.placa = placa;
 		this.horaEntrada = horaEntrada;
 		this.horaSaida = horaSaida;
+		this.estacionamentoAcessado = estacionamento;
+		this.tipoAcesso = tipoAcesso;
+	}
+	
+	public Acesso(Estacionamento estacionamento, String placa, String tipoAcesso) throws DescricaoEmBrancoException {
+		if (placa == null || placa.equals("")) {
+            throw new DescricaoEmBrancoException("Dados da placa nulo ou vazio");
+        }
+
+		this.placa = placa;
 		this.estacionamentoAcessado = estacionamento;
 		this.tipoAcesso = tipoAcesso;
 	}

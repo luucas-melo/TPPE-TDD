@@ -113,6 +113,11 @@ public class Estacionamento {
 
 	public float calculaValorContratante(ArrayList<Acesso> listaAcessos) {
 		float total = 0f;
+		
+		if (listaAcessos.isEmpty()) {
+			return total;
+		}
+		
 		for(Acesso acesso : listaAcessos) {
 			total = total + (acesso.calculaAcesso() * retornoContratante);
 		}
