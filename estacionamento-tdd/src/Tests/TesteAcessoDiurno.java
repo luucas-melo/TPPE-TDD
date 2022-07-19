@@ -17,6 +17,7 @@ import Main.Estacionamento;
 import Main.ValorAcessoInvalidoException;
 
 @RunWith(Parameterized.class)
+@Category(TesteFuncional.class)
 public class TesteAcessoDiurno {
 
 	private Estacionamento estacionamento;
@@ -77,23 +78,8 @@ public class TesteAcessoDiurno {
 	}
 	
 	@Test
-	@Category(TesteFuncional.class)
 	public void calculaValorAcessoDiurno() {	
 		float valorAcesso = this.acesso.calculaAcesso();
 		assertEquals(valorAcesso, this.valorCalculadoAcesso, 0.1f);
-	}
-	
-	@Test(expected=DescricaoEmBrancoException.class)
-	@Category(TesteDeExcecao.class)
-	public void instanciaAcessoComPlacaEmBranco() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
-		Estacionamento estacionamento = new Estacionamento("Estacionamento1", 30f, 0.15f);
-		new Acesso(estacionamento, "", "15-08-2022 10:00:00", "15-08-2022 19:30:00", "");
-	}
-	
-	@Test(expected=DescricaoEmBrancoException.class)
-	@Category(TesteDeExcecao.class)
-	public void instanciaAcessoComPlacaNulo() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
-		Estacionamento estacionamento = new Estacionamento("Estacionamento1", 30f, 0.15f);
-		new Acesso(estacionamento, null, "15-08-2022 10:00:00", "15-08-2022 19:30:00", "");
 	}
 }

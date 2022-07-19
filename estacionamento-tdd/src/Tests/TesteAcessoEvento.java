@@ -17,6 +17,7 @@ import Main.Estacionamento;
 import Main.ValorAcessoInvalidoException;
 
 @RunWith(Parameterized.class)
+@Category(TesteFuncional.class)
 public class TesteAcessoEvento {
 
 	private Estacionamento estacionamento;
@@ -75,22 +76,9 @@ public class TesteAcessoEvento {
 	}
 	
 	@Test
-	@Category(TesteFuncional.class)
 	public void calculaValorAcessoEvento() {	
 		float valorAcesso = this.acesso.calculaAcesso();
 		assertEquals(valorAcesso, this.valorCalculadoAcesso, 0.1f);
-	}
-	
-	@Test(expected=ValorAcessoInvalidoException.class)
-	@Category(TesteDeExcecao.class)
-	public void instanciaEstacionamentoComValorFracaoNegativo() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
-		new Estacionamento("Estacionamento1", -1f, 0.15f);
-	}
-	
-	@Test(expected=DescricaoEmBrancoException.class)
-	@Category(TesteDeExcecao.class)
-	public void instanciaEstacionamentoComNomeEmBranco() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
-		new Estacionamento("", 30f, 0.15f);
 	}
 
 }
