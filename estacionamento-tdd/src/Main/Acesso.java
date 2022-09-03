@@ -1,12 +1,5 @@
 package Main;
 
-import static java.time.temporal.ChronoUnit.MINUTES;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
-
 public class Acesso {
 	
 	String placa, horaEntrada, horaSaida;
@@ -56,34 +49,8 @@ public class Acesso {
 			}
 		}
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		Calculadora calculadora = new Calculadora(this.horaEntrada, this.horaSaida);
 		
-		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-		
-		LocalDateTime entradaTime = LocalDateTime.parse(this.horaEntrada, formatter);
-		LocalDateTime saidaTime = LocalDateTime.parse(this.horaSaida, formatter);
-		
-		float tempoPermanencia = entradaTime.until(saidaTime, MINUTES);
-		
-		int fracoesDe15Minutos = (int) Math.ceil(tempoPermanencia/15f);
-		
-	
-		
-
-		if(entradaTime.until(LocalTime.parse(this.estacionamentoAcessado.entradaNoturna, timeFormatter).atDate(entradaTime.toLocalDate()), MINUTES) <= 0) {
-			return this.estacionamentoAcessado.porcentagemDiariaNoturna * this.estacionamentoAcessado.valorDiariaDiurna;
-		}
-		
-		if(fracoesDe15Minutos < 4) {
-			return this.estacionamentoAcessado.valorFracao * fracoesDe15Minutos;
-			
-		}		
-		else if(fracoesDe15Minutos >= 4 && fracoesDe15Minutos <=36) {
-			return  (1 - this.estacionamentoAcessado.valorHoraCheia) * 
-					(this.estacionamentoAcessado.valorFracao * fracoesDe15Minutos);
-		}
-		else {
-			return this.estacionamentoAcessado.valorDiariaDiurna;
-		}		
+		return calculadora.calculaAcesso(this.estacionamentoAcessado);
 	}
 }
