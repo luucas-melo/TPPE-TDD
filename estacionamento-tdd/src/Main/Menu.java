@@ -17,7 +17,9 @@ public class Menu {
     private String placa, horarioEntrada, horarioSaida, tipoAcesso;
     Scanner sc = new Scanner(System.in);
     
-    List<Estacionamento> estacionamentos = new ArrayList<Estacionamento>();
+    private List<Estacionamento> estacionamentos = new ArrayList<>();
+    private List<List<Acesso>> listasDeAcessos = new ArrayList<>();
+
 	public Menu() throws DescricaoEmBrancoException, ValorAcessoInvalidoException {
 	  
 
@@ -26,7 +28,18 @@ public class Menu {
 	    this.estacionamento3 = new Estacionamento ("Estacionamento3", 10f, 0f, 50f, 0.40f, "20:00:00", "08:00:00", 350f, 40f, 600, 0.7f);
 	    
 	    estacionamentos.add(estacionamento1);
+	    estacionamentos.add(estacionamento2);
+	    estacionamentos.add(estacionamento3);
+
+		listasDeAcessos.add(listaAcessoEstacionamento1);
+		listasDeAcessos.add(listaAcessoEstacionamento2);
+		listasDeAcessos.add(listaAcessoEstacionamento3);
 	    
+		executaMenu();
+
+	}
+
+	private void executaMenu() throws DescricaoEmBrancoException {
 		int opcao;
 		
 		do {
@@ -39,29 +52,31 @@ public class Menu {
 			System.out.println("\n\n"); 
 			switch(opcao) {
 			  case 1:
-				  System.out.println("====Cadastrar acesso===="); 
+				  menuCadastrarAcesso();
+				  break;
+			  case 2:
+				  menuApurarValorContratante();
+				  break;
+			  default:
+			    return;
+			} 
+		} while(opcao != 0);
+	}
+
+	private void menuCadastrarAcesso() throws DescricaoEmBrancoException {
+		System.out.println("====Cadastrar acesso===="); 
 				  menuEstacionamento();
-				  
-				  if (this.estacionamentoAcessado == this.estacionamento1) {
-					  if (this.estacionamentoAcessado.capacidade == this.listaAcessoEstacionamento1.size()) {
-						  System.out.println("Estacionamento lotado \n\n");
-						  break;
-					  }
-				  }
-				  if (this.estacionamentoAcessado == this.estacionamento2) {
-					  if (this.estacionamentoAcessado.capacidade == this.listaAcessoEstacionamento2.size()) {
-						  System.out.println("Estacionamento lotado \n\n");
-						  break;
-					  }
-				  }
-				  if (this.estacionamentoAcessado == this.estacionamento3){
-					  if (this.estacionamentoAcessado.capacidade == this.listaAcessoEstacionamento3.size()) {
-						  System.out.println("Estacionamento lotado \n\n");
-						  break;
-					  }
+
+				  for(int i = 0; i < estacionamentos.size(); i++) {
+
+					if (this.estacionamentoAcessado == estacionamentos.get(i)) {
+						if (this.estacionamentoAcessado.capacidade == this.listasDeAcessos.get(i).size()) {
+							System.out.println("Estacionamento lotado \n\n");
+							break;
+						}
+					}
 				  }
 				  
-				 
 				  System.out.println("Placa do carro"); 	
 				  this.placa = sc.nextLine();
 				  System.out.println("Tipo de acesso (evento ou mensalista):"); 
@@ -69,14 +84,8 @@ public class Menu {
 				  if (this.tipoAcesso.equals("evento") || this.tipoAcesso.equals("mensalista")) {
 					  Acesso acesso = new Acesso(this.estacionamentoAcessado, this.placa, this.tipoAcesso);
 					  System.out.println("Valor do acesso: " + acesso.calculaAcesso() + "\n\n\n\n\n");
-					  
-					  if (this.estacionamentoAcessado == this.estacionamento1) {
-						  this.listaAcessoEstacionamento1.add(acesso);
-					  }else if (this.estacionamentoAcessado == this.estacionamento2) {
-						  this.listaAcessoEstacionamento2.add(acesso);
-					  }else {
-						  this.listaAcessoEstacionamento3.add(acesso);
-					  }
+					  adicionaAcesso(acesso);
+					
 				  }else {
 					  System.out.println("horario Entrada dd-MM-yyyy hh:mm:ss"); 	
 					  this.horarioEntrada = sc.nextLine();
@@ -84,28 +93,23 @@ public class Menu {
 					  this.horarioSaida = sc.nextLine();
 					  Acesso acesso = new Acesso(this.estacionamentoAcessado, this.placa, (String)this.horarioEntrada, (String)this.horarioSaida);
 					  System.out.println("Valor do acesso: " + acesso.calculaAcesso() + "\n\n\n\n\n");
-					  
-					  if (this.estacionamentoAcessado == this.estacionamento1) {
-						  this.listaAcessoEstacionamento1.add(acesso);
-					  }else if (this.estacionamentoAcessado == this.estacionamento2) {
-						  this.listaAcessoEstacionamento2.add(acesso);
-					  }else {
-						  this.listaAcessoEstacionamento3.add(acesso);
-					  }
+					  adicionaAcesso(acesso);
 				  }
-			
-				  break;
-			  case 2:
-				  System.out.println("====Apurar valor do contratante===="); 
-				  menuEstacionamento();
-				  System.out.println("Valor do contratante: " + this.valorContratante + "\n\n\n\n\n");
-				  break;
-			  default:
-			    return;
-			} 
-		} while(opcao != 0);
-		
+	}
 
+	private void menuApurarValorContratante() {
+		System.out.println("====Apurar valor do contratante===="); 
+		menuEstacionamento();
+		System.out.println("Valor do contratante: " + this.valorContratante + "\n\n\n\n\n");
+	}
+
+	private void adicionaAcesso(Acesso acesso) {
+
+		for(int i = 0; i < estacionamentos.size(); i++) {
+			if (this.estacionamentoAcessado == estacionamentos.get(i)) {
+				this.listasDeAcessos.get(i).add(acesso);
+			}
+		}
 	}
 	
 	public void menuEstacionamento() {
