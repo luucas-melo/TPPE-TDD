@@ -7,34 +7,36 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Calculadora {
-	DateTimeFormatter formatter;
-	DateTimeFormatter timeFormatter;
-	LocalDateTime entradaTime;
-	LocalDateTime saidaTime;
+	private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+	private LocalDateTime entradaTime;
+	private LocalDateTime saidaTime;
 	
-	float tempoPermanencia;
+	private float tempoPermanencia;
 	
-	int fracoesDe15Minutos;
+	private int fracoesDe15Minutos;
+	
+	private static final float FRACAO_15_MINUTOS = 15f;
+	private static final int QUANTIDADE_FRACOES_1_HORA = 4;
+	private static final int QUANTIDADE_FRACOES_9_HORA = 36;
 	
 	public Calculadora(String horaEntrada, String horaSaida){
-		this.formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-		this.timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-		this.entradaTime = LocalDateTime.parse(horaEntrada, formatter);
-		this.saidaTime = LocalDateTime.parse(horaSaida, formatter);
+		this.entradaTime = LocalDateTime.parse(horaEntrada, FORMATTER);
+		this.saidaTime = LocalDateTime.parse(horaSaida, FORMATTER);
 		this.tempoPermanencia = entradaTime.until(saidaTime, MINUTES);
-		this.fracoesDe15Minutos = (int) Math.ceil(tempoPermanencia/15f);
+		this.fracoesDe15Minutos = (int) Math.ceil(tempoPermanencia/FRACAO_15_MINUTOS);
 	}
 	
 	public float calculaAcesso(Estacionamento estacionamento) {
-		if(entradaTime.until(LocalTime.parse(estacionamento.entradaNoturna, timeFormatter).atDate(entradaTime.toLocalDate()), MINUTES) <= 0) {
+		if(entradaTime.until(LocalTime.parse(estacionamento.entradaNoturna, TIME_FORMATTER).atDate(entradaTime.toLocalDate()), MINUTES) <= 0) {
 			return estacionamento.porcentagemDiariaNoturna * estacionamento.valorDiariaDiurna;
 		}
 		
-		if(fracoesDe15Minutos < 4) {
+		if(fracoesDe15Minutos < QUANTIDADE_FRACOES_1_HORA) {
 			return estacionamento.valorFracao * fracoesDe15Minutos;
 			
 		}		
-		else if(fracoesDe15Minutos >= 4 && fracoesDe15Minutos <=36) {
+		else if(fracoesDe15Minutos >= QUANTIDADE_FRACOES_1_HORA && fracoesDe15Minutos <= QUANTIDADE_FRACOES_9_HORA) {
 			return  (1 - estacionamento.valorHoraCheia) * 
 					(estacionamento.valorFracao * fracoesDe15Minutos);
 		}
@@ -42,43 +44,4 @@ public class Calculadora {
 			return estacionamento.valorDiariaDiurna;
 		}
 	}
-//	public float calculaAcesso() {
-//		if(tipoAcesso != null) {
-//			if(tipoAcesso.equals("evento")) {
-//				return estacionamentoAcessado.valorAcessoEvento;
-//			}
-//			else if(tipoAcesso.equals("mensalista")) {
-//				return estacionamentoAcessado.valorAcessoMensalista;
-//			}
-//		}	
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//		
-//		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-//		
-//		LocalDateTime entradaTime = LocalDateTime.parse(this.horaEntrada, formatter);
-//		LocalDateTime saidaTime = LocalDateTime.parse(this.horaSaida, formatter);
-//		
-//		float tempoPermanencia = entradaTime.until(saidaTime, MINUTES);
-//		
-//		int fracoesDe15Minutos = (int) Math.ceil(tempoPermanencia/15f);
-//		
-//	
-//		
-//
-//		if(entradaTime.until(LocalTime.parse(this.estacionamentoAcessado.entradaNoturna, timeFormatter).atDate(entradaTime.toLocalDate()), MINUTES) <= 0) {
-//			return this.estacionamentoAcessado.porcentagemDiariaNoturna * this.estacionamentoAcessado.valorDiariaDiurna;
-//		}
-//		
-//		if(fracoesDe15Minutos < 4) {
-//			return this.estacionamentoAcessado.valorFracao * fracoesDe15Minutos;
-//			
-//		}		
-//		else if(fracoesDe15Minutos >= 4 && fracoesDe15Minutos <=36) {
-//			return  (1 - this.estacionamentoAcessado.valorHoraCheia) * 
-//					(this.estacionamentoAcessado.valorFracao * fracoesDe15Minutos);
-//		}
-//		else {
-//			return this.estacionamentoAcessado.valorDiariaDiurna;
-//		}		
-//	}
 }
