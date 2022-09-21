@@ -2,7 +2,7 @@
 - FGA - Faculdade do Gama  
 - TPPE - Técnicas de Programação para Plataformas Emergentes  
 
-## TP1 - ESTACIONAMENTO TDD
+## Trabalho Prático 3
 
 |Matrícula | Aluno |
 | :--: | :--: |
@@ -12,8 +12,3 @@
 | 17/0122468 |  [Nilvan Peres](https://github.com/DaviAntonio/) |
 | 16/0037522 |  [Nilo Medonça](https://github.com/NiloMendonca/) |
 
-
-* Linguagem Java:
-    * Versão: openjdk 16.0.2 2021-07-20
-* Framework para Testes: JUnit 4
-* IDE: Eclipse
